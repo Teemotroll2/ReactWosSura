@@ -1,0 +1,13 @@
+.zoom{
+    transition: transform .2s;
+
+}
+
+.zoom:hover{
+    transform: scale(1.5);
+}
+
+.hola{
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/spotifi-3ba97.appspot.com/o/wos%2Ffondogris.jpg?alt=media&token=9391dbfe-cc11-4e23-9044-70b114e088c2);
+    background-size: 100% 100%;
+}

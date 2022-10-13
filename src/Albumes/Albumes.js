@@ -1,9 +1,64 @@
+import { servicioSpoty } from "../services/servicioSpoty.js"
+import { servicioTOKEN } from "../services/servicioTOKEN.js"
+
+
+import { useState, useEffect } from "react"
+
 export function Albumes (){
 
-    return(
+    //declarando mi primer useState
+    const[canciones,setCanciones]=useState(null)
+    //useState para la carga de datos
+    const[carga,setCarga]=useState(true)
 
-        <>
-            <h1>Hola soy albumes y soy un componente</h1>
-        </>
-    )
+    //usando el useEffect
+    useEffect(function(){
+
+        servicioSpoty()
+        .then(function(respuesta){
+            console.log(respuesta);
+            setCanciones(respuesta.tracks)
+            setCarga(false)
+        })
+        console.log(canciones)
+
+    },[])
+
+    if(carga==true){
+
+        return(
+            <h1>Estoy Cargando...</h1>
+        )
+
+    }else{
+        return(
+            <>
+            <div className="row row-cols-1 row-cols row-cols-md-5 g-3 justify-content-center p-5">
+            {
+                canciones.map((cancion) => {
+                    return (
+                       
+
+                            <div className="col">
+                                <div className="card h-100 mt-5 bg-dark text-white">
+                                    
+                                    <h1>{cancion.name}</h1>
+                                    <img src={cancion.album.images[0].url} className="img-fluid w-100 h-100" />
+                                    <audio className="w-100" src={cancion.preview_url} controls></audio>
+
+                               
+                                </div>
+                            </div>
+
+                        
+                    )
+                })
+            }
+
+           
+        </div>
+
+</> 
+ )
+}   
 }
